@@ -1,0 +1,2331 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>UiPath.Studio.Activities.Api</name>
+  </assembly>
+  <members>
+    <member name="T:UiPath.Studio.Activities.Api.Activities.IActivityFactoryRepository">
+      <summary>
+            A repository of activities' factories.
+            <para>Requires feature ActivityFactoryV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Activities.IActivityFactoryRepository.Register(UiPath.Studio.Activities.Api.Activities.RegisterArgs)">
+      <summary>
+            Registers a RegisterArgs specific for an activity
+            <para>Requires feature ActivityFactoryV3</para></summary>
+      <param name="registerArgs">
+      </param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Activities.IActivityFactoryRepository.Register(System.Type,System.Func{System.String,System.Activities.Activity},System.String)">
+      <summary>
+            Registers a factory method for creating the specified <paramref name="activityType" /> type activity
+            and associates the <paramref name="activityDataId" /> with the activity type.
+            </summary>
+      <param name="activityType">
+      </param>
+      <param name="activityFactory">
+      </param>
+      <param name="activityDataId">
+      </param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Activities.IActivityFactoryRepository.Register``1(System.Func{System.String,``0},System.String)">
+      <summary>
+            Registers a factory method for creating the specified <typeparamref name="T" /> type activity
+            and associates the <paramref name="activityDataId" /> with the activity type.
+            </summary>
+      <typeparam name="T">
+      </typeparam>
+      <param name="activityFactory">
+      </param>
+      <param name="activityDataId">
+      </param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Activities.IActivitySynonymService">
+      <summary>
+            Exposes the functionality of adding activity synonyms.
+            <para>Requires feature ActivitySynonymsV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Activities.IActivitySynonymService.SetActivitySynonyms(System.Type,System.Collections.Generic.IReadOnlyCollection{System.String})">
+      <summary>
+            Adds a list of synonyms for a given activity.
+            </summary>
+      <param name="activity">Activity Type</param>
+      <param name="synonyms">List of synonyms</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Activities.IAttendedActivityService">
+      <summary>
+            Exposes the functionality of setting an activity attended
+            <para>Requires feature AttendedActivitiesV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Activities.IAttendedActivityService.SetActivityAttended(System.Type)">
+      <summary>
+            Sets the isAttended flag for a given activity.
+            <para>Requires feature AttendedActivitiesV1</para></summary>
+      <param name="activity">Activity Type</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Activities.RegisterArgs">
+      <summary>
+            Args used to exchange information between Studio and Activities
+            related to activity type, activity data id and
+            multiple factory methods for creating the selected activity type
+            <para>Requires feature ActivityFactoryV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Activities.RegisterArgs.ActivityDataId">
+      <summary>
+            Associated id for the activity type
+            <para>Requires feature ActivityFactoryV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Activities.RegisterArgs.ActivityType">
+      <summary>
+            The activity type of the activity created by the associated factory method FactoryV1 or FactoryV3
+            <para>Requires feature ActivityFactoryV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Activities.RegisterArgs.FactoryV1">
+      <summary>
+            Factory method for creating the specified activity type
+            String parameter is for the resource name (asset name, queue name, etc)
+            <para>Requires feature ActivityFactoryV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Activities.RegisterArgs.FactoryV3">
+      <summary>
+            Factory method for creating the specified Activity type
+            First string parameter is for the resource name (asset name, queue name, etc)
+            Second string parameter is for the Orchestror folder path of the resource
+            <para>Requires feature ActivityFactoryV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.ScopedActivities.IExclusiveScopedActivitiesService">
+      <summary>
+            Exposes the functionality of filtering Command Pallete activities based on a current Scope.
+            <para>Requires feature ExclusiveScopedActivitiesV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ScopedActivities.IExclusiveScopedActivitiesService.AddExclusiveScopedActivities(System.Type,System.Collections.Generic.IReadOnlyCollection{System.Type})">
+      <summary>
+            Adds a list of suitable activity types to the specified scope type.
+            </summary>
+      <param name="scopeActivity">Scope Activity Type</param>
+      <param name="exclusiveActivitiesCollection">List of suitable Activities</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.ScopedActivities.IScopedActivitiesService">
+      <summary>
+            Exposes the functionality of adding scope activity types with their suggested activity types.
+            <para>Requires feature ScopedActivitiesV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ScopedActivities.IScopedActivitiesService.SetScopedActivity(System.Type,System.Type)">
+      <summary>
+            Adds a pair made from a scope activity and an activity that is suitable to that scope
+            <para>Requires feature ScopedActivitiesV1</para></summary>
+      <param name="scopeActivity">Scope Activity Type</param>
+      <param name="activity">Suitable Activity Type</param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ScopedActivities.IScopedActivitiesService.SetScopedActivities(System.Type,System.Collections.Generic.IReadOnlyCollection{System.Type})">
+      <summary>
+            Adds a list of suitable activity types to the specified scope type.
+            </summary>
+      <param name="scopeActivity">Scope Activity Type</param>
+      <param name="activitiesCollection">List of suitable Activities</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.IAnalyzerConfigurationService">
+      <summary>
+            Represents a components that configures the workflow analyzer.
+            </summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Analyzer.IAnalyzerConfigurationService.AddRule``1(UiPath.Studio.Activities.Api.Analyzer.Rules.Rule{``0})">
+      <summary>
+            Adds a rule to the analyzer.
+            </summary>
+      <typeparam name="T">The <see cref="T:UiPath.Studio.Analyzer.Models.IInspectionObject" /> to inspect in this rule.</typeparam>
+      <param name="rule">The rule to add.</param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Analyzer.IAnalyzerConfigurationService.AddCounter``1(UiPath.Studio.Activities.Api.Analyzer.Rules.Counter{``0})">
+      <summary>
+            Adds a counter to the analyzer.
+            </summary>
+      <typeparam name="T">The <see cref="T:UiPath.Studio.Analyzer.Models.IInspectionObject" /> to inspect in this counter.</typeparam>
+      <param name="counter">The counter to add.</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.IResult">
+      <summary>
+            A result component.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.IResult.HasErrors">
+      <summary>
+            True if the inspection had errors.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.IResult.Messages">
+      <summary>
+            The message.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.AnalyzerInspector">
+      <summary>
+            Base class for rules and counters.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.AnalyzerInspector.Name">
+      <summary>
+            Name of this object
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.AnalyzerInspector.Id">
+      <summary>
+            Id of this object
+            </summary>
+      <remarks>
+            Use a notation similar to https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/
+            </remarks>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.AnalyzerInspector.Parameters">
+      <summary>
+            Represents this object's execution parameters.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.AnalyzerInspector.DefaultIsEnabled">
+      <summary>
+            Represents the default value for IsEnabled flag
+            <para>Requires feature WorkflowAnalyzerV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.AnalyzerInspector.DocumentationLink">
+      <summary>
+            The configurable documentation link.
+            <para>Requires feature WorkflowAnalyzerV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.AnalyzerInspector.ApplicableScopes">
+      <summary>
+            The target configuration where this rule should apply. <see cref="T:UiPath.Studio.Activities.Api.Analyzer.Rules.RuleConstants" /> for some examples.
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.Counter">
+      <summary>
+            Interface for counter definition
+            </summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Analyzer.Rules.Counter.#ctor(System.String,System.String)">
+      <summary>
+            Creates a counter instance.
+            </summary>
+      <param name="counterName">Counter's name</param>
+      <param name="counterId">Counters's Id</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.Counter`1">
+      <summary>
+            Typed counter.
+            </summary>
+      <typeparam name="T">The type of inspection object to inspect.</typeparam>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Analyzer.Rules.Counter`1.#ctor(System.String,System.String,System.Func{System.Collections.Generic.IReadOnlyCollection{`0},UiPath.Studio.Activities.Api.Analyzer.Rules.Counter,UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult})">
+      <summary>
+            Creates a new typed counter.
+            </summary>
+      <param name="counterName">Counter's name.</param>
+      <param name="counterId">Counter's Id.</param>
+      <param name="inspectionFunction">The function used to inspect</param>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Counter`1.Inspect">
+      <summary>
+            Inspects the target and returns an inspection result.
+            </summary>
+      <returns>The inspection's result.</returns>
+      <exception cref="T:System.NotSupportedException">
+            The object to inspect is not supported.
+            </exception>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult">
+      <summary>
+            A result to an inspection.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.HasErrors">
+      <inheritdoc />
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.Messages">
+      <inheritdoc />
+            For more detailed messages please use <see cref="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.InspectionMessages" /></member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.InspectionMessages">
+      <summary>
+            Better, scalable and detailed messages.
+            Specialized types are available <see cref="T:UiPath.Studio.Activities.Api.Analyzer.Rules.ActivityMessage" /><para>Requires feature WorkflowAnalyzerV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.RecommendationMessage">
+      <summary>
+            The recommandetion for this result.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.ErrorLevel">
+      <summary>
+            The error level of this result.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.DocumentationLink">
+      <summary>
+            The documentation link of this result
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.IParameter">
+      <summary>
+            Defines how a <see cref="T:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule" /> or <see cref="T:UiPath.Studio.Activities.Api.Analyzer.Rules.Counter" /> parameter should look like.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.IParameter.Key">
+      <summary>
+            Unique key for this parameter in this rule.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.IParameter.LocalizedDisplayName">
+      <summary>
+            Current localized display name <see cref="P:System.Threading.Thread.CurrentUICulture" /></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.IParameter.Value">
+      <summary>
+            A value from user for this parameter.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.IParameter.ConstraintRegex">
+      <summary>
+            The constraint regex for the value
+            <para>Requires feature WorkflowAnalyzerV2</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.IParameter.DefaultValue">
+      <summary>
+            The default value for this parameter
+            <para>Requires feature WorkflowAnalyzerV2</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.ActivityMessage">
+      <inheritdoc />
+      <summary>
+        <para>Requires feature WorkflowAnalyzerV3</para>
+      </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.ActivityMessage.ActivityId">
+      <summary>
+            The id of the activity related to the message.
+            <para>Requires feature WorkflowAnalyzerV3</para></summary>
+      <remarks>In order for highlight of SourceMember to work, ActivityId must be set</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.ActivityMessage.ActivityDisplayName">
+      <summary>
+            The activity namedisplay.
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.ActivityMessage.SourceMember">
+      <summary>
+            [Optional] The source of the result. For example, a variable or property
+            <para>Requires feature WorkflowAnalyzerV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionMessage">
+      <summary>
+            A message in <see cref="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult.InspectionMessages" /><para>Requires feature WorkflowAnalyzerV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionMessage.Message">
+      <summary>
+            The message.
+            <para>Requires feature WorkflowAnalyzerV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.ProjectMessage">
+      <inheritdoc />
+      <summary>
+        <para>Requires feature WorkflowAnalyzerV5</para>
+      </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.ProjectMessage.Dependency">
+      <summary>
+            [Optional] The dependency with error
+            <para>Requires feature WorkflowAnalyzerV5</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.WorkflowMessage">
+      <inheritdoc />
+      <summary>
+        <para>Requires feature WorkflowAnalyzerV3</para>
+      </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.WorkflowMessage.SourceMember">
+      <summary>
+            [Optional] The source of the result
+            <para>Requires feature WorkflowAnalyzerV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.Parameter">
+      <inheritdoc />
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Parameter.Key">
+      <inheritdoc />
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Parameter.LocalizedDisplayName">
+      <inheritdoc />
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Parameter.Value">
+      <inheritdoc />
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Parameter.ConstraintRegex">
+      <inheritdoc />
+      <summary>
+        <para>Requires feature WorkflowAnalyzerV2</para>
+      </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Parameter.DefaultValue">
+      <inheritdoc />
+      <summary>
+        <para>Requires feature WorkflowAnalyzerV2</para>
+      </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule">
+      <summary>
+            Interface for rule definition.
+            </summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule.#ctor(System.String,System.String)">
+      <summary>
+            Creates a rule instance 
+            </summary>
+      <param name="ruleName">Rule's name</param>
+      <param name="ruleId">Rule id</param>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule.ErrorLevel">
+      <summary>
+            The configurable error level for this rule. Only use this at runtime to read the effective error level.
+            <para>Do not set this when defining the rule. Use DefaultErrorLevel instead</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule.DefaultErrorLevel">
+      <summary>
+            The default error level for this rule.
+            <para>Requires feature WorkflowAnalyzerV2</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule.RecommendationMessage">
+      <summary>
+            The configurable recommendation message.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule`1">
+      <summary>
+            Typed rule.
+            </summary>
+      <typeparam name="T">The type of inspection object to inspect.</typeparam>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule`1.#ctor(System.String,System.String,System.Func{`0,UiPath.Studio.Activities.Api.Analyzer.Rules.Rule,UiPath.Studio.Activities.Api.Analyzer.Rules.InspectionResult})">
+      <summary>
+            Creates a new rule.
+            </summary>
+      <param name="ruleName">Rule's name</param>
+      <param name="ruleId">Rule's id</param>
+      <param name="inspectionFunction">The function used to inspect.</param>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Analyzer.Rules.Rule`1.Inspect">
+      <summary>
+            Inspects the target and returns an inspection result. 
+            </summary>
+      <returns>The inspection's result.</returns>
+      <exception cref="T:System.NotSupportedException">
+            The object to inspect is not supported.
+            </exception>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Analyzer.Rules.RuleConstants">
+      <summary>
+            Defines a few predefined flags for controlling when a Rule should apply
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Analyzer.Rules.RuleConstants.DevelopmentRuleConstant">
+      <summary>
+            Represents a rule that applies to Studio
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Analyzer.Rules.RuleConstants.BusinessRuleConstant">
+      <summary>
+            Represents a rule that applies to StudioX
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Analyzer.Rules.RuleConstants.DevelopmentRule">
+      <summary>
+            Represents a rule that applies to Studio.
+            Kept for comaptibility reasons. DO NOT USE
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Analyzer.Rules.RuleConstants.BusinessRule">
+      <summary>
+            Represents a rule that applies to StudioX
+            Kept for comaptibility reasons. DO NOT USE
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Analyzer.Rules.RuleConstants.TestAutomationRuleConstant">
+      <summary>
+            Represents a rule that applies to StudioT
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.BusyService.IStudioBusyService">
+      <summary>
+            Allows displaying a busy indicator on long running processes with status updates.
+            <para>Requires feature BusyServiceV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.BusyService.IStudioBusyService.Begin(System.String)">
+      <summary>
+            Creates a new busy scope able to present progress.
+            If the service already has a busy scope the newly created one becomes the primary scope until disposed.
+            <para>Requires feature BusyServiceV1</para></summary>
+      <param name="status">Indicates a status message to present</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.BusyService.IStudioBusyService.SetStatus(System.String)">
+      <summary>
+            Sets a status on a busy screen, if it exists.
+            <para>Requires feature BusyServiceV1</para></summary>
+      <param name="status">The status to set.</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.BusyService.IStudioBusyScope">
+      <summary>
+            A scope within a long running process that allows status updates.
+            <para>Requires feature BusyServiceV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.BusyService.IStudioBusyScope.DisposeTask">
+      <summary>
+            This represents the asynchronous dispose operation.
+            This interface should have extended IAsyncDisposable, which unfortunately is not available on NET4.
+            Use this to await the release of the current scope after calling <see cref="M:System.IDisposable.Dispose" />.
+            <para>Requires feature BusyServiceV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.DesignFeatureKeys">
+      <summary>
+            Supported Studio feature keys.
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.Settings">
+      <summary>
+            Studio 19.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.SettingsV2">
+      <summary>
+            Studio 20.4
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.SettingsV3">
+      <summary>
+            Studio 21.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.Theme">
+      <summary>
+            Studio 19.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.Wizards">
+      <summary>
+            Studio 19.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WizardsV2">
+      <summary>
+            Studio 20.2
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WizardsV3">
+      <summary>
+            Studio 20.3
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WizardsV4">
+      <summary>
+            Studio 20.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.AccessProvider">
+      <summary>
+            Studio 19.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.AccessProviderV2">
+      <summary>
+            Studio 20.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.AccessProviderV3">
+      <summary>
+            Studio 20.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.AccessProviderV4">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.Telemetry">
+      <summary>
+            Studio 19.10
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzer">
+      <summary>
+            Studio 19.10
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV2">
+      <summary>
+            Studio 19.10.2
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV3">
+      <summary>
+            Studio 19.10.3
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ProjectProperties">
+      <summary>
+            Studio 20.2
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ProjectPropertiesV2">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV4">
+      <summary>
+            Studio 20.2
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV5">
+      <summary>
+            Studio 20.4.2
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV6">
+      <summary>
+            Studio 20.8.0
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV7">
+      <summary>
+            Studio 20.9.0
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV8">
+      <summary>
+            Studio 20.10.3
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV9">
+      <summary>
+            Studio 21.3
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WorkflowAnalyzerV10">
+      <summary>
+            Studio 21.10
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ScopedActivities">
+      <summary>
+            Studio 20.2
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ActivitySynonyms">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.AttendedActivities">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.InstallExtensions">
+      <summary>
+            Studio 20.4
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.InstallExcelAddIn">
+      <summary>
+            Studio 20.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ActivityFactory">
+      <summary>
+            Studio 20.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ActivityFactoryV2">
+      <summary>
+            Studio 20.7
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ActivityFactoryV3">
+      <summary>
+            Studio 21.4
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.StudioDesignSettings">
+      <summary>
+            Studio 20.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.StudioDesignSettingsV2">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ExpressionService">
+      <summary>
+            Studio 20.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.DesignTimeExpressionExpanderService">
+      <summary>
+            Studio 21.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ExclusiveScopedActivities">
+      <summary>
+            Studio 20.10
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.MockingCapabilities">
+      <summary>
+            Studio 20.9
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.MockingCapabilitiesV2">
+      <summary>
+            Studio 20.10
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ObjectRecorderHighlight">
+      <summary>
+            Studio 21.8.0
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ObjectRecorderCurrentElements">
+      <summary>
+            Studio 21.10.0
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ObjectRepository">
+      <summary>
+            Studio 20.10.0
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.SimpleObjectRepository">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.OrganizationalSettings">
+      <summary>
+            Studio 20.10.3
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WindowOperations">
+      <summary>
+            Studio 21.2
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.WindowOperationsV2">
+      <summary>
+            Studio 21.3
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.PackageBindings">
+      <summary>
+            Studio 21.4
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.PackageBindingsV2">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.OrchestratorApi">
+      <summary>
+            Studio 21.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.LicenseApi">
+      <summary>
+            Studio 21.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.BusyService">
+      <summary>
+            Studio 21.10
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ModernClassicSetting">
+      <summary>
+            Studio 21.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.StudioXActivityCategoriesV2">
+      <summary>
+            Studio 21.6
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.ActivitiesToolboxItemFilter">
+      <summary>
+            Studio 21.8
+            </summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.DesignFeatureKeys.AutoCaptureElements">
+      <summary>
+            Studio 21.10.0, Object Repo -&gt; Record / right-click Capture Elements -&gt; Capture All Elements button
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Expressions.IDesignTimeExpressionExpanderService">
+      <summary>
+            Service used to expand/unwrap dynamic expressions at design time, for e.g. dynamic file paths.
+            <para>Requires feature DesignTimeExpressionExpanderServiceV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Expressions.IDesignTimeExpressionExpanderService.ExpandString(System.String)">
+      <summary>
+            Expands the given string expression.
+            <para>Requires feature DesignTimeExpressionExpanderServiceV1</para></summary>
+      <param name="originalExpression">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Expressions.IDesignTimeExpressionExpanderService.GenerateDynamicString(System.String)">
+      <summary>
+            Generates a dynamic expression string based on the specified value. For example, if the given string
+            is a file path that that is user-specific (e.g. a file path that points to something in My Documents),
+            then this will turn that static string into a dynamic expression that can be "expanded" by
+            <see cref="M:UiPath.Studio.Activities.Api.Expressions.IDesignTimeExpressionExpanderService.ExpandString(System.String)" /> at design time and evaluated by WWF at runtime, and that is user agnostic.
+            It turns "C:\Users\SomeUser\SomeFolder" to something like string.Format("{}\SomeFolder", Environment.UserFolder).
+            
+            <para>Requires feature DesignTimeExpressionExpanderServiceV1</para></summary>
+      <param name="originalValue">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Expressions.IExpressionService.GetIdentifierAndLiteralList(System.String,System.String)">
+      <summary>
+            Returns a flat list of all identifiers and literals encountered in the given expression, in the order in which they were encountered.
+            <para>Requires feature ExpressionServiceV1</para></summary>
+      <param name="expression">The expression to be tokenized</param>
+      <param name="expressionLanguage">The expression to be tokenized <see cref="T:UiPath.Studio.Activities.Api.ProjectProperties.ExpressionLanguage" /></param>
+      <returns>
+      </returns>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Expressions.Token.StringRepresentation">
+      <summary>
+            Name of the token
+            <para>Requires feature ExpressionServiceV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Expressions.Token.TokenType">
+      <summary>
+            Type of the token <see cref="P:UiPath.Studio.Activities.Api.Expressions.Token.TokenType" /><para>Requires feature ExpressionServiceV1</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Expressions.TokenType.ObjectCreation">
+      <summary>
+            Token represents the creation of an object
+            <para>Requires feature ExpressionServiceV1</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Expressions.TokenType.IdentifierReference">
+      <summary>
+            Token represents the referencing of an object/method by name
+            <para>Requires feature ExpressionServiceV1</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Expressions.TokenType.LiteralUsage">
+      <summary>
+            Token represents the usage of a literal value
+            <para>Requires feature ExpressionServiceV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IExtensionsInstallerService.InstallExcelAddIn">
+      <summary>
+            Triggers the installation process for the UiPath Excel AddIn
+            <para>Requires feature InstallExcelAddInV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.IOrganizationalSettingsService">
+      <summary>
+            Interface that describes how to read organizational settings.
+            <para>Requires feature OrganizationalSettingsV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IOrganizationalSettingsService.GetSettingsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+      <summary>
+            Retrieves multiple organizational settings from a data source and returns a map of the keys found and their values.
+            </summary>
+      <param name="keys">An enumeration of organizational setting keys.</param>
+      <param name="ct">
+      </param>
+      <returns>A dictionary which maps each of the found keys and it's value. The dictionary uses a OrdinalIgnoreCase StringComparer, as assets are case insensitive</returns>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.IRegisterAnalyzerConfiguration">
+      <summary>
+            Component called by the analyzer application in each rule assembly,
+            in order to configure the host analyzer.
+            </summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IRegisterAnalyzerConfiguration.Initialize(UiPath.Studio.Activities.Api.Analyzer.IAnalyzerConfigurationService)">
+      <summary>
+            Offers an injection point to the implementing assembly in order to
+            access <see cref="T:UiPath.Studio.Activities.Api.Analyzer.IAnalyzerConfigurationService" /> capabilities.
+            </summary>
+      <param name="workflowAnalyzerConfigService">The analyzer interface.</param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.IRegisterWorkflowDesignApi">
+      <summary>
+            Workflow designer API registration. It follows the same pattern as IRegisterMetadata. Studio will scan the types in your assembly for implementations of this interface.
+            <para>If an implementation is found, an instance is created by Studio and the API instance is handed through <see cref="M:UiPath.Studio.Activities.Api.IRegisterWorkflowDesignApi.Initialize(UiPath.Studio.Activities.Api.IWorkflowDesignApi)" />.</para><para>Note that older Studio versions that do not ship with the API will not be able to load your assembly</para><para>
+            If you want to keep the compatibility with the older Studio versions,
+            instead of implementing this interface,
+            </para><para>
+            add an Initialize(object) method on the implementation of IRegisterMetadata, that Studio will discover through reflection.
+            Cast the object parameter to <see cref="T:UiPath.Studio.Activities.Api.IWorkflowDesignApi" /> on your side
+            </para><para>The same <see cref="T:UiPath.Studio.Activities.Api.IWorkflowDesignApi" /> instance may be retrieved from the designer context through GetService</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IRegisterWorkflowDesignApi.Initialize(UiPath.Studio.Activities.Api.IWorkflowDesignApi)">
+      <summary>
+            Register the API instance
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.IWindowOperationsService">
+      <summary>
+            The entry point for window related operations
+            <para>Requires feature WindowOperationsV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IWindowOperationsService.GetMainWindowHandle">
+      <summary>
+            Returns a handle to the main studio window
+            <para>Requires feature WindowOperationsV1</para></summary>
+      <returns>the window handle</returns>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IWindowOperationsService.MinimizeMainWindow">
+      <summary>
+            Minimizes the main studio window
+            <para>Requires feature WindowOperationsV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IWindowOperationsService.MaximizeMainWindow">
+      <summary>
+            Maximizes the main studio window
+            <para>Requires feature WindowOperationsV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IWindowOperationsService.RestoreMainWindow">
+      <summary>
+            Restores the main studio window
+            <para>Requires feature WindowOperationsV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IWindowOperationsService.DisableMainWindow">
+      <summary>
+            Disables studio main window.
+            <para>Requires feature WindowOperationsV2</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IWindowOperationsService.EnableMainWindow">
+      <summary>
+            Enables studio main window.
+            <para>Requires feature WindowOperationsV2</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.IWorkflowDesignApi">
+      <inheritdoc />
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.OrganizationalSettings">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.IOrganizationalSettingsService" /><para>Requires feature OrganizationalSettingsV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.Settings">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService" /></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.Telemetry">
+      <summary>
+            See <see cref="T:UiPath.Studio.Api.Telemetry.ITelemetryService" /></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.Theme">
+      <summary>
+            See <see cref="T:UiPath.Studio.Api.Theme.IThemeService" /></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.Wizards">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Wizards.IWizardsService" /></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.AccessProvider">
+      <summary>
+            See <see cref="T:UiPath.Activities.Api.Base.IAccessProvider" /></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.WorkflowAnalyzerConfigService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Analyzer.IAnalyzerConfigurationService" /></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.ProjectPropertiesService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.ProjectProperties.IProjectPropertiesService" /><para>Requires feature ProjectPropertiesV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.ScopedActivitiesService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.ScopedActivities.IScopedActivitiesService" /><para>Requires feature ScopedActivitiesV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.AttendedActivityService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Activities.IAttendedActivityService" /><para>Requires feature AttendedActivitiesV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.DesignTimeExpressionExpanderService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Expressions.IDesignTimeExpressionExpanderService" /><para>Requires feature DesignTimeExpressionExpanderServiceV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.ActivityFactory">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Activities.IActivityFactoryRepository" /><para>Requires feature ActivityFactoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.ObjectLibrary">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.ObjectLibrary.ILibraryService" /><para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.ExclusiveScopedActivitiesService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.ScopedActivities.IExclusiveScopedActivitiesService" /><para>Requires feature ExclusiveScopedActivitiesV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.MockActivityService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Mocking.IMockActivityService" /><para>Requires feature MockingCapabilitiesV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.WindowOperations">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.IWindowOperationsService" /><para>Requires feature WindowOperationsV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.PackageBindings">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.PackageBindings.IPackageBindingsService" /><para>Requires feature PackageBindingsV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.OrchestratorApiService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.IOrchestratorApiService" /><para>Requires feature OrchestratorApiV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.LicenseApiService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.Licensing.ILicenseApiService" /><para>Requires feature LicenseApiV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.IWorkflowDesignApi.BusyService">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.BusyService.IStudioBusyService" /><para>Requires feature BusyServiceV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Licensing.ILicenseApiService.GetLicenseEdition">
+      <summary>
+        <see cref="T:UiPath.Studio.Activities.Api.Licensing.LicenseEdition" />
+        <para>Requires feature LicenseApiV1</para>
+      </summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Licensing.ILicenseApiService.GetUserInfo">
+      <summary>
+            Information about the current user, if any
+            <para>Requires feature LicenseApiV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Licensing.ILicenseApiService.RegisterUserInfoHandler(System.Action{UiPath.Studio.Activities.Api.Licensing.UserInfo})">
+      <summary>
+            Handler for User Info changes
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Licensing.UserInfo.UserInfoState">
+      <summary>
+        <see cref="T:UiPath.Studio.Activities.Api.Licensing.UserInfoState" />
+        <para>Requires feature LicenseApiV1</para>
+      </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Licensing.UserInfo.UserId">
+      <summary>
+            User Id
+            <para>Requires feature LicenseApiV1</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Licensing.LicenseEdition.Basic">
+      <summary>
+            Free SKU license edition.
+            Introduced with Studio 21.10
+            <para>Requires feature LicenseApiV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Mocking.IMockActivityService.OnSurroundWithMock">
+      <summary>
+            Gets or sets a Surround with Mock action that will be called by the designer.
+            The ModelItem is the activity to mock.
+            The Activity (might be null) is the activity to execute instead
+            The ModelItem
+            <para>Requires feature MockingCapabilitiesV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Mocking.IMockActivityService.OnGetMockActivityInfo">
+      <summary>
+            Gets or sets a method to collect mockactivities strating from an activity
+            Returns a dictionary with all the activities that are mocked and the executed ones
+            <para>Requires feature MockingCapabilitiesV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Mocking.IMockActivityService.MockActivityType">
+      <summary>
+            Gets or sets the full type of the Activity that implements the mock capability
+            <para>Requires feature MockingCapabilitiesV2</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription">
+      <summary>
+            content handler interface
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.ContentName">
+      <summary>
+            content name
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.DisplayName">
+      <summary>
+            localized display name
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.Description">
+      <summary>
+            localized description
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.DisplayColor">
+      <summary>
+            content color (for the edit object buttons)
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.Icon">
+      <summary>
+            content icon
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.SelectionName">
+      <summary>
+            selection name coresponding to this content registered using <see cref="M:UiPath.Studio.Activities.Api.ObjectLibrary.IContentOperations.RegisterObjectSelection(System.Action{UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription})" /><para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.OnEdit">
+      <summary>
+            edit handler
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.OnHighlight">
+      <summary>
+            highlight handler
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.NeedsParentValidation">
+      <summary>
+            specifies if this content needs a specific parent on add and move operations
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.RegisterParentValidation(System.Action{UiPath.Studio.Activities.Api.ObjectLibrary.IObjectRestriction})">
+      <summary>
+            if <see cref="P:UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription.NeedsParentValidation" /> is true used to validate parent objects on add and move
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectRestriction.ObjectType">
+      <summary>
+            The type of object this restriction applies too. If null applies to all
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectRestriction.RequiredContent">
+      <summary>
+            is true used to validate if the object contains one of the specified content names
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.ObjectLibrary.IContentOperations">
+      <summary>
+            desiger operations api
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ObjectLibrary.IContentOperations.RegisterContent(System.Action{UiPath.Studio.Activities.Api.ObjectLibrary.IContentDescription})">
+      <summary>
+            registers a content handler for a specific content name
+            </summary>
+      <param name="setter">
+      </param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ObjectLibrary.IContentOperations.RegisterObjectSelection(System.Action{UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription})">
+      <summary>
+            registers a handler for indicating objects
+            </summary>
+      <param name="setter">
+      </param>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.ObjectLibrary.ILibraryService">
+      <summary>
+            Api for manipulating library objects
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.ILibraryService.Content">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.ObjectLibrary.IContentOperations" /><para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.ILibraryService.Objects">
+      <summary>
+            See <see cref="T:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectOperations" /><para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription.SelectionName">
+      <summary>
+            selection name
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription.DisplayName">
+      <summary>
+            localized display name for indicate button
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription.Description">
+      <summary>
+            localized description
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription.DisplayColor">
+      <summary>
+            content color (for the edit object buttons)
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription.Icon">
+      <summary>
+            content icon
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.ObjectLibrary.IObjectSelectionDescription.RecordDisplayName">
+      <summary>
+            localized display name for record button
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.IAssetApiService">
+      <summary>
+            Exposes the API for performing asset related operations
+            <para>Requires feature OrchestratorApiV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IAssetApiService.GetAssets(System.Int32,System.String)">
+      <summary>
+            Returns a list of strings representing the asset names in the specified folder.
+            Not specifying a folder will result in the default one being used
+            <para>Requires feature OrchestratorApiV1</para></summary>
+      <param name="top">
+      </param>
+      <param name="folder">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IAssetApiService.GetAssets(UiPath.Studio.Activities.Api.AssetRequestParameters,System.String)">
+      <summary>
+            Returns a list of strings representing the asset names in the specified folder.
+            Not specifying a folder will result in the default one being used
+            <para>Requires feature OrchestratorApiV1</para></summary>
+      <param name="requestParameters">Parameters to be used in the request.</param>
+      <param name="folder">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.IAssetApiService.GetAssetFolders(System.Int32)">
+      <summary>
+            Returns the list of accessible folders
+            <para>Requires feature OrchestratorApiV1</para></summary>
+      <param name="top">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.IOrchestratorApiService">
+      <summary>
+            Top level wrapper for Orchestrator related operations.
+            Exposed in <see cref="T:UiPath.Studio.Activities.Api.IWorkflowDesignApi" /><para>Requires feature OrchestratorApiV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.PackageBindings.IPackageBindingsService">
+      <summary>
+            Exposes the functionality of generating package binding for activity types.
+            <para>Requires feature PackageBindingsV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.PackageBindings.PackageBindingTypes">
+      <summary>
+            Common BindingType constants
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.PackageBindings.PackageBindingMetadataKeys.PackageBinding">
+      <summary>
+            PackageBinding metadata key
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.PackageBindings.PackageBindingMetadataKeys.PackageBindingProperty">
+      <summary>
+            PackageBindingProperty metadata key
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.PackageBindings.ConnectionProperties">
+      <summary>
+            Connection property names as they appear in the bindings export
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.PackageBindings.ConnectionProperties.ConnectionId">
+      <summary>
+            The name of the connection resource
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.PackageBindings.ConnectionProperties.UseConnectionService">
+      <summary>
+            Source of the connection token - local / connection service
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.PackageBindings.ConnectionProperties.Connector">
+      <summary>
+            Connection provider. E.g GMail, Office365
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.PackageBindings.ConnectionSources">
+      <summary>
+            Defines where the connection is defined
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.PackageBindings.ConnectionSources.Local">
+      <summary>
+            Connection is stored on a local repository
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.PackageBindings.ConnectionSources.Service">
+      <summary>
+            Connection is stored in Orchestrator
+            <para>Requires feature PackageBindingsV2</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.ProjectProperties.IProjectPropertiesService">
+      <summary>
+            The entry point for expression language related functionality
+            <para>Requires feature ProjectPropertiesV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ProjectProperties.IProjectPropertiesService.GetExpressionLanguage">
+      <summary>
+            Returns an entry from <see cref="T:UiPath.Studio.Activities.Api.ProjectProperties.ExpressionLanguage" /> as int
+            <para>Requires feature ProjectPropertiesV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ProjectProperties.IProjectPropertiesService.GetProjectDirectory">
+      <summary>
+            Returns the root directory of the current project
+            <para>Requires feature ProjectPropertiesV1</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.ProjectProperties.IProjectPropertiesService.GetTargetFramework">
+      <summary>
+            Returns an entry from <see cref="!:UiPath.Shared.TargetFramework" /> as string
+            <para>Requires feature ProjectPropertiesV2</para></summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService">
+      <summary>
+            The entry point for settings related functionality
+            </summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService.AddCategory(UiPath.Studio.Activities.Api.Settings.SettingsCategory)">
+      <summary>
+            Add a settings category in the project settings UI
+            </summary>
+      <param name="category">The description of the settings page</param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService.AddSection(UiPath.Studio.Activities.Api.Settings.SettingsCategory,UiPath.Studio.Activities.Api.Settings.SettingsSection)">
+      <summary>
+            Add a section to this category
+            <para>If the section key does not start with the the category key, the latter is added as prefix of the former
+            and the <see cref="P:UiPath.Studio.Activities.Api.Settings.SettingsElement.Key" /> value is updated</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService.AddSetting(UiPath.Studio.Activities.Api.Settings.SettingsEditorControlContainer,UiPath.Studio.Activities.Api.Settings.SettingDescriptionBase)">
+      <summary>
+            Generates a default <see cref="T:UiPath.Studio.Activities.Api.Settings.SettingsEditorControl" /> based on the <paramref name="setting" /> and passes it to <see cref="M:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService.AddSetting(UiPath.Studio.Activities.Api.Settings.SettingsEditorControlContainer,UiPath.Studio.Activities.Api.Settings.SettingsEditorControl)" /></summary>
+      <param name="parent">The <see cref="T:UiPath.Studio.Activities.Api.Settings.SettingsCategory" /> or <see cref="T:UiPath.Studio.Activities.Api.Settings.SettingsSection" /> where the generated setting control is appended</param>
+      <param name="setting">The setting description that is used to generate a control</param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService.AddSetting(UiPath.Studio.Activities.Api.Settings.SettingsEditorControlContainer,UiPath.Studio.Activities.Api.Settings.SettingsEditorControl)">
+      <summary>
+            Add a settings control
+            </summary>
+      <param name="parent">The <see cref="T:UiPath.Studio.Activities.Api.Settings.SettingsCategory" /> or <see cref="T:UiPath.Studio.Activities.Api.Settings.SettingsSection" /> where the generated setting control is appended</param>
+      <param name="setting">The setting description that is used to generate a control</param>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService.TrySetValue(System.String,System.String)">
+      <summary>
+            Sets and saves a setting value
+            <para>Requires feature SettingsV2</para></summary>
+      <param name="key">The key of the setting to be set</param>
+      <param name="value">The value of the setting to be set</param>
+      <returns>true if the value has been set</returns>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.ModernClassicSettings">
+      <summary>
+            Defines how an activity package prefers to handle Modern vs Classic activities
+            If set to <see cref="F:UiPath.Studio.Activities.Api.Settings.ModernClassicSettings.UseGlobalSetting" />, it will defer the behavior to the global Studio setting.
+            Having it explicitly set to either <see cref="F:UiPath.Studio.Activities.Api.Settings.ModernClassicSettings.UseModern" /> or <see cref="F:UiPath.Studio.Activities.Api.Settings.ModernClassicSettings.UseClassic" /> will result in setting being overwritten for the particular package
+            <para>Requires feature ModernClassicSettingV1</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Settings.ModernClassicSettings.UseGlobalSetting">
+      <summary>
+            Defers the decision to the global Studio setting
+            <para>Requires feature ModernClassicSettingV1</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Settings.ModernClassicSettings.UseModern">
+      <summary>
+            Marks that the Modern activites should be considered the default ones
+            <para>Requires feature ModernClassicSettingV1</para></summary>
+    </member>
+    <member name="F:UiPath.Studio.Activities.Api.Settings.ModernClassicSettings.UseClassic">
+      <summary>
+            Marks that the Classic activities should be considered the defualt ones
+            <para>Requires feature ModernClassicSettingV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.MultipleValuesSelectorDescription">
+      <summary>
+            A setting that allows selecting multiple value from a predefined collection of values.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.MultipleValuesSelectorDescription.Values">
+      <summary>
+            Possible values to select.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.MultipleValuesSelectorDescription.DefaultValues">
+      <summary>
+            Default selection
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingDescriptionBase`1.GetDisplayValue">
+      <summary>
+            Format a value for display
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingDescriptionBase.Description">
+      <summary>
+            An explanation of the setting
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingDescriptionBase.IsReadOnly">
+      <summary>
+            If set, the value is not editable and not persisted.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingDescriptionBase.IsDesignTime">
+      <summary>
+            If true, this setting is only available at design time
+            <para>Requires feature SettingsV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingDescriptionBase.Label">
+      <summary>
+            The label to use for this setting
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingDescriptionBase.RequiresPackageReload">
+      <summary>
+            If true, changing this setting requires a package reload
+            <para>Only applies to design time settings</para><para>Requires feature SettingsV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SettingsCategory">
+      <summary>
+            A settings category
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsCategory.Description">
+      <summary>
+            [Optional] Displayed bellow the title, explains the purpose of this page
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsCategory.Header">
+      <summary>
+            The category header
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsCategory.IsHidden">
+      <summary>
+            If the property is set to true, then the category will not be displayed in the project settings dialog
+            <para>Requires feature SettingsV2</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SettingsControlBase">
+      <summary>
+            A settings element that is part of the UI
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsControlBase.IsDesignTime">
+      <summary>
+            If true, this setting is only available at design time
+            <para>Requires feature SettingsV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsControlBase.RequiresPackageReload">
+      <summary>
+            If true, changing this setting requires a package reload
+            <para>Only applies to design time settings</para><para>Requires feature SettingsV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SettingsEditorControl">
+      <summary>
+            Settings editor. It appears as a label with an associated control
+            <para>An instance of this can be passed to <see cref="M:UiPath.Studio.Activities.Api.Settings.IActivitiesSettingsService.AddSetting(UiPath.Studio.Activities.Api.Settings.SettingsEditorControlContainer,UiPath.Studio.Activities.Api.Settings.SettingsEditorControl)" /></para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsEditorControl.Control">
+      <summary>
+            The control to use for this setting.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsEditorControl.Description">
+      <summary>
+            [Optional] Longer explanatory text for this setting, displayed as a tooltip
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsEditorControl.Label">
+      <summary>
+            [Optional] The setting editor label. This can be a markdown text.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SettingsEditorControlContainer">
+      <summary>
+            A settings UI element that can host editors
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SettingsElement">
+      <summary>
+            Base class for settings elements with associated keys
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsElement.Key">
+      <summary>
+            The unique key associated with this setting. Used for storage/retrieval.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SettingsSection">
+      <summary>
+            A settings "group box"
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsSection.Description">
+      <summary>
+            [Optional] Displayed bellow the title, explains the purpose of this section
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsSection.IsExpanded">
+      <summary>
+            Default expanded state
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SettingsSection.Title">
+      <summary>
+            The section title
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SingleValueEditorDescription`1">
+      <summary>
+            Describes a setting entry that allows editing a single value of type <typeparamref name="T" />.
+            <para>A default editor is created based on <typeparamref name="T" /></para></summary>
+      <typeparam name="T">bool, int, double or string</typeparam>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SingleValueEditorDescription`1.DefaultValue">
+      <summary>
+            The default value of this setting
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SingleValueEditorDescription`1.Validate">
+      <summary>
+            Validate a value (applies to editors that allow free text input)
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Settings.SingleValueSelectorDescription">
+      <summary>
+            A setting that allows selecting a single value from a predefined collection of values
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Settings.SingleValueSelectorDescription.Values">
+      <summary>
+            Possible values to select.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Wizards.IWizardExecutionContext">
+      <summary>
+            Execution context for a wizard
+            <para>Requires feature WizardsV3</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Wizards.IWizardExecutionContext.GetInsertionContainer">
+      <summary>
+            Get the container where the result activity would be inserted.
+            <para>The returned value should never be null, but it's still recommended to guard against</para><para>Requires feature WizardsV3</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Wizards.IWizardExecutionContext.Initialize">
+      <summary>
+            Prepare the conditions in the designer like insertion container
+            <para>Requires feature WizardsV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Wizards.IWizardsService">
+      <summary>
+            Add wizards to Studio
+            </summary>
+    </member>
+    <member name="M:UiPath.Studio.Activities.Api.Wizards.IWizardsService.Register(UiPath.Studio.Activities.Api.Wizards.WizardCollection)">
+      <summary>
+            Add a wizard collection
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Wizards.RunWizardSettings">
+      <summary>
+            Wizard implementation settings.
+            <para>Requires feature WizardsV4</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.RunWizardSettings.HasProxySequenceSupport">
+      <summary>
+            When true, the wizard implementation can handle proxy Sequences.
+            <para>Requires feature WizardsV4</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Wizards.WizardBase">
+      <summary>
+            A wizard implementation.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardBase.RunWizard">
+      <summary>
+            Executes a wizard and returns the resulted activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardBase.RunWizardWithContainerAsync">
+      <summary>
+            Executes a wizard in realtime, allowing it to directly manipulate the workflow it is called on.
+            Takes precedence over <see cref="P:UiPath.Studio.Activities.Api.Wizards.WizardBase.RunWizard" />, if both are implemented then only this one will be run.
+            The context can be used to retrieve an initially empty target
+            container, part of the workflow, which it can manipulate freely in real time. The return value
+            indicates whether or not the provided container should be kept as part of the workflow.
+            In case the container should be discarded, any operations done on the workflow outside
+            of the container should be cleaned up by the wizard.
+            <para>Requires feature WizardsV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardBase.RunWizardAsync">
+      <summary>
+            Kept for backwards compatibility with 20.4 Preview versions
+            <para>Requires feature WizardsV3</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardBase.RunWizardSettings">
+      <summary>
+            Settings that describe this wizard implementation capabilities this wizard.
+            <para>Requires feature WizardsV4</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Wizards.WizardCollection">
+      <summary>
+            Returns a multi tree of wizard definitions. Each entry is a button on the ribbon. Children
+            for each entry are menu items.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardCollection.WizardDefinitions">
+      <summary>
+            Returns a forest of wizard definitions. Their order will define how they appear in the ribbon.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Activities.Api.Wizards.WizardDefinition">
+      <summary>
+            Summary of a wizard's Ui properties.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.DisplayName">
+      <summary>
+            Translated display name.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.IconUri">
+      <summary>
+            Location of the icon resource in the providing assembly.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.Tooltip">
+      <summary>
+            Translated tooltip.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.Shortcut">
+      <summary>
+            This wizard's shortcut.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.ChildrenDefinitions">
+      <summary>
+            Returns sub-wizards. (apprentices?) or null if none available
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.Wizard">
+      <summary>
+            The wizard instance for this definition or null.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.MinimizeBeforeRun">
+      <summary>
+            If true, Studio will minimize before calling RunWizard, and restore when RunWizard returns
+            The default value is True
+            <para>Requires feature WizardsV2</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Activities.Api.Wizards.WizardDefinition.RequiredStudioFeature">
+      <summary>
+            If null or empty, Studio will add the wizard.
+            If using a product code, Studio will add the wizard if the license contains that code.
+            If using other string, Studio will add the wizard if it knows the string.
+            Anything else, no wizard.
+            <para>Requires feature WizardsV3</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.ArgumentDirection">
+      <summary>
+            Possible directions of an argument.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IActivityContext">
+      <summary>
+            The context (scope) of an activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityContext.Variables">
+      <summary>
+            Variables in scope.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityContext.DelegateArguments">
+      <summary>
+            Delegate arguments in scope.
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityContext.WorkflowArguments">
+      <summary>
+            Workflow arguments.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityContext.Project">
+      <summary>
+            The Project this activity belongs to.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IActivityModel">
+      <summary>
+            A representation of an activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.DelegateArguments">
+      <summary>
+            The collection of delegate arguments defined in this activity.
+            <para>Requires feature WorkflowAnalyzerV4</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.Arguments">
+      <summary>
+            The collection of first level arguments of this activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.InternalArguments">
+      <summary>
+            The collection of first level non browsable arguments of this activity.
+            (BrowsableAttribute set to false)
+            <para>Requires feature WorkflowAnalyzerV6</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.Properties">
+      <summary>
+            The collection of first level properties of this activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.InternalProperties">
+      <summary>
+            The collection of first level non browsable properties of this activity.
+            (BrowsableAttribute set to false)
+            <para>Requires feature WorkflowAnalyzerV6</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.Children">
+      <summary>
+            The collection of children of this acitivity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.Parent">
+      <summary>
+            The parent.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.Context">
+      <summary>
+            Inherited context of this activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.ObjectReferences">
+      <summary>
+            References in the object library used by this activity
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.SupportsObjectReferences">
+      <summary>
+            True if this activity supports using the objects library
+            <para>Requires feature ObjectRepositoryV1</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.ToolboxName">
+      <summary>
+            Activity name as it is registered in toolbox.
+            <para>Requires feature WorkflowAnalyzerV6</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.Type">
+      <summary>
+            The <see cref="P:System.Type.AssemblyQualifiedName" /> type of the workflow element
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.Variables">
+      <summary>
+            The collection of variables
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.AnnotationText">
+      <summary>
+            The text of the annotation
+            <para>Requires feature WorkflowAnalyzerV9</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IActivityModel.PackageBinding">
+      <summary>
+            Associated package binding for this activity
+            <para>Requires feature PackageBindingsV1</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IArgumentModel">
+      <summary>
+            Represents an argument.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IArgumentModel.Direction">
+      <summary>
+            The direction of this argument.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.ICaseModel">
+      <summary>
+            Represents a Case model inside a Switch Activity
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ICaseModel.Activity">
+      <summary>
+            Activity associated with the Case. 
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ICaseModel.CaseExpression">
+      <summary>
+            Case expression associated with the Case as <see cref="T:System.String" /></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.ICatchBlockModel">
+      <summary>
+            Interface representing a single Catch entity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ICatchBlockModel.Activity">
+      <summary>
+            The Activity associated with a Catch block.
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ICatchBlockModel.ExceptionType">
+      <summary>
+            The type of Exception caught by the Catch block, as <see cref="T:System.String" />.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IConnection">
+      <summary>
+            Represents a connection between two nodes
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IConnection.KeyType">
+      <summary>
+            The <see cref="P:System.Type.AssemblyQualifiedName" /> type of the connection key
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IConnection.KeyExpression">
+      <summary>
+            The corresponding key value of this connection
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IConnection.Node">
+      <summary>
+            The source/destination FlowNode
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IExpressionContainer">
+      <summary>
+            Workflow element containing expressions
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Analyzer.Models.IExpressionContainer.GetExpressions">
+      <summary>
+            Returns all expression models from this workflow element i.e. variable default values,
+            argument default values, property arguments expressions, conditions etc.
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:UiPath.Studio.Analyzer.Models.IExpressionContainer.GetChildExpressionContainers">
+      <summary>
+            Returns all children that are possible expression containers i.e. activities, nodes, states, transitions.
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IExpressionModel">
+      <summary>
+            Expression model having either DefaultValue either DefinedExpression populated
+            depending on the expression type (variable and workflow argument - DefaultValue, activity argument - DefinedExpression)
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IExpressionModel.DefaultValue">
+      <summary>
+            The default value of this variable/argument.
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IFlowchartModel">
+      <summary>
+            Represents a Flowchart.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFlowchartModel.Nodes">
+      <summary>
+            The nodes of this Flowchart
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFlowchartModel.StartNode">
+      <summary>
+            First step of the Flowchart
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IFlowNodeModel">
+      <summary>
+            Representes a FlowNode
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFlowNodeModel.ChildActivity">
+      <summary>
+            The Activity contained inside a FlowNode
+            <remarks>Can be null</remarks></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFlowNodeModel.OutConnections">
+      <summary>
+            Outgoing connections 
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFlowNodeModel.InConnections">
+      <summary>
+            Incoming connections 
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFlowNodeModel.Expression">
+      <summary>
+            The expression that needs to be evaluated to decide the next step
+             </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFlowNodeModel.Owner">
+      <summary>
+            The Flowchart owner of this node
+             </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IIfElseModel">
+      <summary>
+            Represents an If-Else activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IIfElseModel.ThenBlock">
+      <summary>
+            Activity associated with the Then block.
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IIfElseModel.ElseBlock">
+      <summary>
+            Activity associated with the Else block.
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IMemberModel">
+      <summary>
+            Represents a class member. (variable, property, argument)
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IMemberModel.DisplayName">
+      <summary>
+            The displayed name of the memeber.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IMemberModel.Type">
+      <summary>
+            The <see cref="P:System.Type.AssemblyQualifiedName" /> of the member.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IMemberModel.DefinedExpression">
+      <summary>
+            The expression or value of the member.
+            If the expression is a Literal&lt;string&gt;
+            it will be between ""
+            Ex: ""This is a plain string""
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IPickBranchModel">
+      <summary>
+            Represents a Pick Branch model.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPickBranchModel.Trigger">
+      <summary>
+            Represents a Pick Branch Trigger Activity.
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPickBranchModel.Action">
+      <summary>
+            Represents a Pick Branch Action Activity.
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPickBranchModel.Parent">
+      <summary>
+            The parent Pick activity
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IPickModel">
+      <summary>
+            Represents a Pick activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPickModel.PickBranches">
+      <summary>
+            Collection of <see cref="T:UiPath.Studio.Analyzer.Models.IPickBranchModel" /></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IPropertyModel">
+      <summary>
+            Represents a property in an Activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPropertyModel.Properties">
+      <summary>
+            The list of browsable properties of this member.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPropertyModel.InternalProperties">
+      <summary>
+            The collection of non browsable properties of this member.
+            (BrowsableAttribute set to false)
+            Non browsable properties are not parsed in depth.
+            <para>Requires feature WorkflowAnalyzerV6</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPropertyModel.Arguments">
+      <summary>
+            The list of browsable arguments of this member.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPropertyModel.InternalArguments">
+      <summary>
+            The collection of non browsable arguments of this member.
+            (BrowsableAttribute set to false)
+            <para>Requires feature WorkflowAnalyzerV6</para></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IStateMachineModel">
+      <summary>
+            Represents a StateMachine.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateMachineModel.States">
+      <summary>
+            The collection of State of this StateMachine
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateMachineModel.InitialState">
+      <summary>
+            The start point of the StateMachine
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IStateModel">
+      <summary>
+            Represents a State in a StateMachine
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateModel.Context">
+      <summary>
+            The inherited context of this State
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateModel.Transitions">
+      <summary>
+            The outgoing transitions available from this State
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateModel.Entry">
+      <summary>
+            Entry action of the State
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateModel.Exit">
+      <summary>
+            Exit action of the State
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateModel.Owner">
+      <summary>
+            The StateMachine owner of this State
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateModel.IsFinal">
+      <summary>
+            Indicates if this State is final
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IStateModel.Variables">
+      <summary>
+            The collection of variables
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.ISwitchModel">
+      <summary>
+            Represents a Switch activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ISwitchModel.Default">
+      <summary>
+            Activity associated with the Default block.
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ISwitchModel.Cases">
+      <summary>
+            The collection of <see cref="T:UiPath.Studio.Analyzer.Models.ICaseModel" /></summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.ITransition">
+      <summary>
+            Represents a transition from a State
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITransition.From">
+      <summary>
+            The State that this transition comes from
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITransition.To">
+      <summary>
+            The State that this transition leads to
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITransition.Action">
+      <summary>
+            Action activity which should be executed when the Transition is taken
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITransition.Condition">
+      <summary>
+            The condition to decide whether the Transition should be taken after the Trigger activity is completed
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITransition.Trigger">
+      <summary>
+            Trigger activity of the Transition
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.ITryCatchModel">
+      <summary>
+            Represents a Try-Catch Activity.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITryCatchModel.TryBlock">
+      <summary>
+            Activity associated with the Try block.
+            </summary>
+      <remarks>This can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITryCatchModel.Catches">
+      <summary>
+            The collection of <see cref="T:UiPath.Studio.Analyzer.Models.ICatchBlockModel" />.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.ITryCatchModel.FinallyBlock">
+      <summary>
+            Activity associated with the Finally block.
+            </summary>
+      <remarks>Value can be null.</remarks>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IVariableContainer.Variables">
+      <summary>
+            The collection of variables
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Analyzer.Models.IVariableContainer.GetChildVariableContainers">
+      <summary>
+            Get the children that suport a list o variables.
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IVariableModel">
+      <summary>
+            The representation of a variable.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IVariableModel.DefaultValue">
+      <summary>
+            The default value of this expression.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowElement.Id">
+      <summary>
+            Generated workflow id. Can be null.
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowElement.Type">
+      <summary>
+            The <see cref="P:System.Type.AssemblyQualifiedName" /> type of the workflow element
+            <para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowElement.ImmediateParent">
+      <summary>
+            The immediate parent of the workflow element.
+            It can be a <see cref="T:UiPath.Studio.Analyzer.Models.IFlowNodeModel" />, <see cref="T:UiPath.Studio.Analyzer.Models.IStateModel" />,
+            <see cref="T:UiPath.Studio.Analyzer.Models.IPickBranchModel" />, <see cref="T:UiPath.Studio.Analyzer.Models.ITransition" />, <see cref="T:UiPath.Studio.Analyzer.Models.IActivityModel" /><para>Requires feature WorkflowAnalyzerV7</para></summary>
+    </member>
+    <member name="M:UiPath.Studio.Analyzer.Models.IWorkflowElement.GetChildren">
+      <summary>
+            The immediate first level children (not only IActivityModel) <see cref="P:UiPath.Studio.Analyzer.Models.IWorkflowElement.ImmediateParent" /><para>Requires feature WorkflowAnalyzerV7</para></summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IInspectionObject.DisplayName">
+      <summary>
+            The name of the object to inspect.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IDependency">
+      <summary>
+            Represents a project dependency.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IDependency.Name">
+      <summary>
+            The name of the dependency.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IDependency.Assemblies">
+      <summary>
+            List of referenced assemblies.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IFileModel">
+      <summary>
+            Represents a file.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IFileModel.RelativePath">
+      <summary>
+            Relative path of the file, including extension.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IPackageReference">
+      <summary>
+            Represents a project package reference.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IPackageReference.Version">
+      <summary>
+            The version of the package.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IProjectModel">
+      <summary>
+            Represents a project.
+            <remarks>
+            An IProjectModel is the complete project representation,
+            including contained workflows parsing models.
+            Project analysis is ran against this model.
+            </remarks></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectModel.EntryPoint">
+      <summary>
+            The entry point workflow of the project.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectModel.ExceptionHandlerWorkflow">
+      <summary>
+            The exception handling workflow of this project.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectModel.Workflows">
+      <summary>.
+            The workflows in the project.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IProjectSummary">
+      <summary>
+            Represents partial information about a project.
+            <remarks>
+            Unlike <see cref="T:UiPath.Studio.Analyzer.Models.IProjectModel" />, an IProjectSummary only holds information
+            available before the contained workflow files are being parsed./&gt;
+            Useful for workflow analysis and project definition analysis
+            </remarks></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.Directory">
+      <summary>
+            The project directory.
+            <para>Requires feature WorkflowAnalyzerV9</para></summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.FileNames">
+      <summary>
+            The workflow file names in this project.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.Dependencies">
+      <summary>
+            The dependencies of this project.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.ProjectOutputType">
+      <summary>
+            Type of output.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.ProjectProfileType">
+      <summary>
+            Type of profile.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.ExpressionLanguage">
+      <summary>
+            The expression language of this project.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.RequiresUserInteraction">
+      <summary>
+            Indicates if project requires user interaction.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.SupportsPersistence">
+      <summary>
+            Indicates if project supports persistence.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.EntryPointName">
+      <summary>
+            The entry point workflow name of the project.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.ProjectFilePath">
+      <summary>
+            The project.json file path.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IProjectSummary.ExceptionHandlerWorkflowName">
+      <summary>
+            The exception handling workflow name of this project.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IWebServiceRerefence">
+      <summary>
+            Represents a project web service reference.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWebServiceRerefence.WebDocumentUri">
+      <summary>
+            Web document address.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWebServiceRerefence.WebServiceType">
+      <summary>
+            Type of the web service.
+            </summary>
+    </member>
+    <member name="T:UiPath.Studio.Analyzer.Models.IWorkflowModel">
+      <summary>
+            Represents a workflow file.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowModel.Root">
+      <summary>
+            The root activity of the workflow.
+            Can be null.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowModel.Arguments">
+      <summary>
+            The arguments of the workflow.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowModel.ImportedNamespaces">
+      <summary>
+            The imported namespaces.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowModel.Project">
+      <summary>
+            The project this workflow belongs to.
+            </summary>
+    </member>
+    <member name="P:UiPath.Studio.Analyzer.Models.IWorkflowModel.Assemblies">
+      <summary>
+            The assemblies of the workflow.
+            <para>Requires feature WorkflowAnalyzerV9</para></summary>
+    </member>
+  </members>
+</doc>
