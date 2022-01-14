@@ -20,13 +20,13 @@ namespace SingleStringStaticLogRule
             }
 
             // Create the rule definition
-            var logMessageConstraint = new Rule<IActivityModel>("SingleStringStaticLogs", "DE-USG-099", SingleStringStaticLog);
+            var logMessageConstraint = new Rule<IActivityModel>("SingleStringStaticLogs", "ST-USG-099", SingleStringStaticLog);
             logMessageConstraint.DefaultErrorLevel = System.Diagnostics.TraceLevel.Error;
-            logMessageConstraint.Parameters.Add("single_string_static_log", new Parameter()
+            logMessageConstraint.Parameters.Add("whitelist_keywords", new Parameter()
             {
-                DefaultValue = "false",
-                Key = "single_string_static_log",
-                LocalizedDisplayName = "Single String Static Log"
+                DefaultValue = "",
+                Key = "whitelist_keywords",
+                LocalizedDisplayName = "Whitelist of Keywords"
             });
 
             // Add the rule to the config service
@@ -37,11 +37,24 @@ namespace SingleStringStaticLogRule
         {
             var messageList = new List<InspectionMessage>();
 
+            var whitelist_string = configuredRule.Parameters["whitelist_keywords"]?.Value;
+            var whitelist = whitelist_string.Split(',');
+
+            var error_level = configuredRule.ErrorLevel;
 
             foreach (var activityArgument in activityToInspect.Arguments)
             {
                 if (activityArgument.DisplayName == "Message")
                 {
+                    // check against whitelist
+                    foreach(var item in whitelist)
+                    {
+                        if (activityArgument.DefinedExpression.Contains(item))
+                        {
+                            // It violates the basic rule, but allow it as an exception because it's in the whitelist
+                            error_level = System.Diagnostics.TraceLevel.Warning;
+                        }
+                    }
                     // get count of double-quotes
                     int count = activityArgument.DefinedExpression.Count(f => f == '"');
 
@@ -72,7 +85,6 @@ namespace SingleStringStaticLogRule
                             Message = $"Last character must be a double-quote: {activityArgument.DefinedExpression}"
                         });
                     }
-
                 }
             }
 
@@ -83,7 +95,7 @@ namespace SingleStringStaticLogRule
                     HasErrors = true,
                     InspectionMessages = messageList,
                     RecommendationMessage = $"Only static log messages are permitted",
-                    ErrorLevel = configuredRule.ErrorLevel
+                    ErrorLevel = error_level
                 };
             }
 
